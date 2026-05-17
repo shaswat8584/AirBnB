@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
@@ -15,11 +16,11 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
 
-const MongoURI = "mongodb://127.0.0.1:27017/AirBnB";
+const MongoURI = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/AirBnB";
   
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: process.env.SESSION_SECRET || "keyboard cat",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -75,7 +76,9 @@ app.get("/", (req, res) => {
   res.redirect("/listings");
 });
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   console.log("app is listening");
 });
 
