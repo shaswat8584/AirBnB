@@ -18,12 +18,12 @@
             </div>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/listings/new">Add Listing</a>
-                <% if (!currentUser) { %>
+                <% if (typeof currentUser === 'undefined' || !currentUser) { %>
                     <b><a class="nav-link" href="/signup">Signup</a></b>
                     <b><a class="nav-link" href="/login">Login</a></b>
-                    <% } if (currentUser){ %>
-                        <b><a class="nav-link" href="/logout">Logout</a></b>
-                        <% } %>
+                <% } else { %>
+                    <b><a class="nav-link" href="/logout">Logout</a></b>
+                <% } %>
             </div>
         </div>
     </div>
